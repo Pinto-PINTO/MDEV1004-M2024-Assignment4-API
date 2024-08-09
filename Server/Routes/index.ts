@@ -31,7 +31,7 @@ router.get('/', (req, res, next) => {  DisplayMovieList(req, res, next); });
 router.get('/find/:id', (req, res, next) => {  DisplayMovieById(req, res, next); });
 
 /* Add Movie */
-router.post('/add', (req, res, next) => {  AddMovie(req, res, next); });
+router.post('/add', (req, res, next) => {  console.log(">>>>>>>", req.body); AddMovie(req, res, next); });
 
 /* Update Movie */
 router.put('/update/:id', (req, res, next) => {  UpdateMovie(req, res, next); });

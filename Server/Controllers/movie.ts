@@ -79,6 +79,7 @@ export function DisplayMovieById(req: Request, res: Response, next: NextFunction
  */
 export function AddMovie(req: Request, res:Response, next: NextFunction): void
 {
+    console.log(">>>", req.body)
     let genres = (req.body.genres) ?  SanitizeArray(req.body.genres as string) : SanitizeArray("");
     let directors = (req.body.directors) ? SanitizeArray(req.body.directors as string) : SanitizeArray("");
     let actors = (req.body.actors) ? SanitizeArray(req.body.actors as string) : SanitizeArray("");

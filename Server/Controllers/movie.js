@@ -38,31 +38,40 @@ function DisplayMovieById(req, res, next) {
 }
 exports.DisplayMovieById = DisplayMovieById;
 function AddMovie(req, res, next) {
-    let genres = (req.body.genres) ? (0, Util_1.SanitizeArray)(req.body.genres) : (0, Util_1.SanitizeArray)("");
-    let directors = (req.body.directors) ? (0, Util_1.SanitizeArray)(req.body.directors) : (0, Util_1.SanitizeArray)("");
-    let actors = (req.body.actors) ? (0, Util_1.SanitizeArray)(req.body.actors) : (0, Util_1.SanitizeArray)("");
-    let writers = (req.body.writers) ? (0, Util_1.SanitizeArray)(req.body.writers) : (0, Util_1.SanitizeArray)("");
-    let movie = new movie_1.default({
-        movieID: req.body.movieID,
-        title: req.body.title,
-        studio: req.body.studio,
-        genres: genres,
-        directors: directors,
-        writers: writers,
-        actors: actors,
-        length: req.body.length,
-        year: req.body.year,
-        shortDescription: req.body.shortDescription,
-        mpaRating: req.body.mpaRating,
-        criticsRating: req.body.criticsRating
-    });
-    movie_1.default.create(movie)
-        .then(() => {
-        res.status(200).json({ success: true, msg: "Movie added", data: movie });
-    })
-        .catch((err) => {
-        console.error(err);
-    });
+    try{
+        const genres = (req.body.genres ? String(req.body.genres) : "");
+        const directors = (req.body.directors ? String(req.body.directors) : "");
+        const actors = (req.body.actors ? String(req.body.actors) : "");
+        const writers = (req.body.writers ? String(req.body.writers) : "");
+
+        // let genres = (req.body.genres) ? (0, Util_1.SanitizeArray)(req.body.genres) : (0, Util_1.SanitizeArray)("");
+        // let directors = (req.body.directors) ? (0, Util_1.SanitizeArray)(req.body.directors) : (0, Util_1.SanitizeArray)("");
+        // let actors = (req.body.actors) ? (0, Util_1.SanitizeArray)(req.body.actors) : (0, Util_1.SanitizeArray)("");
+        // let writers = (req.body.writers) ? (0, Util_1.SanitizeArray)(req.body.writers) : (0, Util_1.SanitizeArray)("");
+        let movie = new movie_1.default({
+            movieID: req.body.movieID,
+            title: req.body.title,
+            studio: req.body.studio,
+            genres: genres,
+            directors: directors,
+            writers: writers,
+            actors: actors,
+            length: req.body.length,
+            year: req.body.year,
+            shortDescription: req.body.shortDescription,
+            mpaRating: req.body.mpaRating,
+            criticsRating: req.body.criticsRating
+        });
+        movie_1.default.create(movie)
+            .then(() => {
+            res.status(200).json({ success: true, msg: "Movie added", data: movie });
+        })
+            .catch((err) => {
+            console.error(err);
+        });
+    }catch(error){
+        console.log("Error:",error);
+    }
 }
 exports.AddMovie = AddMovie;
 function UpdateMovie(req, res, next) {
@@ -71,10 +80,15 @@ function UpdateMovie(req, res, next) {
         res.status(400).json({ success: false, msg: "A valid ID is required to update a movie", data: "" });
     }
     else {
-        let genres = (req.body.genres) ? (0, Util_1.SanitizeArray)(req.body.genres) : (0, Util_1.SanitizeArray)("");
-        let directors = (req.body.directors) ? (0, Util_1.SanitizeArray)(req.body.directors) : (0, Util_1.SanitizeArray)("");
-        let actors = (req.body.actors) ? (0, Util_1.SanitizeArray)(req.body.actors) : (0, Util_1.SanitizeArray)("");
-        let writers = (req.body.writers) ? (0, Util_1.SanitizeArray)(req.body.writers) : (0, Util_1.SanitizeArray)("");
+        const genres = (req.body.genres ? String(req.body.genres) : "");
+        const directors = (req.body.directors ? String(req.body.directors) : "");
+        const actors = (req.body.actors ? String(req.body.actors) : "");
+        const writers = (req.body.writers ? String(req.body.writers) : "");
+
+        // let genres = (req.body.genres) ? (0, Util_1.SanitizeArray)(req.body.genres) : (0, Util_1.SanitizeArray)("");
+        // let directors = (req.body.directors) ? (0, Util_1.SanitizeArray)(req.body.directors) : (0, Util_1.SanitizeArray)("");
+        // let actors = (req.body.actors) ? (0, Util_1.SanitizeArray)(req.body.actors) : (0, Util_1.SanitizeArray)("");
+        // let writers = (req.body.writers) ? (0, Util_1.SanitizeArray)(req.body.writers) : (0, Util_1.SanitizeArray)("");
         let movieToUpdate = new movie_1.default({
             _id: id,
             movieID: req.body.movieID,
